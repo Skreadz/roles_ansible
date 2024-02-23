@@ -1,0 +1,29 @@
+- name: Add haschi gpg key
+  block:
+    - name: haschicorp | no apt key
+      ansible.builtin.apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        state: present
+
+    - name: haschicorp | apt source
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64] https://apt.releases.hashicorp.com jammy main"
+        state: present
+
+- name: install terraform
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - software-properties-common
+    - gnupg2
+    - terraform
+
+- name: cp trusted.gpg
+  ansible.builtin.copy:
+    src: /etc/apt/trusted.gpg
+    dest: /etc/apt/trusted.gpg.d
+    owner: root
+    group: root
+    mode: '0644'
