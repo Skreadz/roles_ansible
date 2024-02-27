@@ -1,0 +1,15 @@
+- name: Donwload zabbix deb
+  ansible.builtin.get_url:
+    url: https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb
+    dest: /tmp/
+
+- name: Install zabbix
+  ansible.builin.apt:
+    deb: /tmp/zabbix-release_6.4-1+ubuntu22.04_all.deb
+    state: present
+    update_cache: true
+
+- name: Install zabbix packages
+  apt:
+    name: ['zabbix-server-mysql', 'zabbix-frontend-php', 'zabbix-apache-conf', 'zabbix-sql-scripts', 'zabbix-agent']
+    state: present
