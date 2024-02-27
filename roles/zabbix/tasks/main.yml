@@ -4,12 +4,12 @@
     dest: /tmp/
 
 - name: Install zabbix
-  ansible.builin.apt:
+  ansible.builtin.apt:
     deb: /tmp/zabbix-release_6.4-1+ubuntu22.04_all.deb
     state: present
-    update_cache: true
 
 - name: Install zabbix packages
   apt:
     name: ['zabbix-server-mysql', 'zabbix-frontend-php', 'zabbix-apache-conf', 'zabbix-sql-scripts', 'zabbix-agent']
     state: present
+    update_cache: true
