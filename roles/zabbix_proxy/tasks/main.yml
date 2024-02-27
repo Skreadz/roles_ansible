@@ -10,13 +10,6 @@
 
 - name: Install zabbix packages
   apt:
-    name: ['zabbix-server-mysql', 'zabbix-frontend-php', 'zabbix-apache-conf', 'zabbix-sql-scripts', 'zabbix-agent']
+    name: ['mysql-server', 'zabbix-proxy-mysql', 'zabbix-sql-scripts']
     state: present
     update_cache: true
-
-#- name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
-#  mysql_user:
-#    name: zabbix
-#    password: password
-#    priv: '*.*:ALL,GRANT'
-#    state: present
