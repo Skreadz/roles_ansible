@@ -13,3 +13,10 @@
     name: ['zabbix-server-mysql', 'zabbix-frontend-php', 'zabbix-apache-conf', 'zabbix-sql-scripts', 'zabbix-agent']
     state: present
     update_cache: true
+
+- name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+  mysql_user:
+    name: zabbix
+    password: password
+    priv: '*.*:ALL,GRANT'
+    state: present
